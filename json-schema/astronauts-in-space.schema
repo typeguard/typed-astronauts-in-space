@@ -1,0 +1,97 @@
+{
+    "oneOf": [
+        [
+            "AstronautsInSpace",
+            {
+                "$ref": "#/definitions/AstronautsInSpace"
+            }
+        ],
+        [
+            "ISSCurrentLocation",
+            {
+                "$ref": "#/definitions/ISSCurrentLocation"
+            }
+        ]
+    ],
+    "definitions": {
+        "Person": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "craft": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "craft",
+                "name"
+            ],
+            "title": "person"
+        },
+        "AstronautsInSpace": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "number": {
+                    "type": "integer"
+                },
+                "people": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Person"
+                    }
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "message",
+                "number",
+                "people"
+            ],
+            "title": "AstronautsInSpace"
+        },
+        "IssPosition": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "longitude": {
+                    "type": "string"
+                },
+                "latitude": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "latitude",
+                "longitude"
+            ],
+            "title": "iss_position"
+        },
+        "ISSCurrentLocation": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "timestamp": {
+                    "type": "integer"
+                },
+                "iss_position": {
+                    "$ref": "#/definitions/IssPosition"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "iss_position",
+                "message",
+                "timestamp"
+            ],
+            "title": "ISSCurrentLocation"
+        }
+    }
+}

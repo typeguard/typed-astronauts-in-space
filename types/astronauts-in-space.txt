@@ -1,0 +1,21 @@
+class AstronautsInSpace {
+    number: Int
+    people: List<Person>
+    message: String
+}
+
+class Person {
+    craft: String
+    name: String
+}
+
+class ISSCurrentLocation {
+    timestamp: Int
+    issPosition: IssPosition
+    message: String
+}
+
+class IssPosition {
+    longitude: String
+    latitude: String
+}
