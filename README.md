@@ -1,4 +1,4 @@
-# Open APIs From Space – Typed API
+# Open APIs From Space – Typed JSON API
 
 > Open Notify is an open source project to provide a simple programming interface for some of NASA’s awesome data.
 
