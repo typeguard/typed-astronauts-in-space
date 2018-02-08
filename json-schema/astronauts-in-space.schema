@@ -76,11 +76,11 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "timestamp": {
-                    "type": "integer"
-                },
                 "iss_position": {
                     "$ref": "#/definitions/IssPosition"
+                },
+                "timestamp": {
+                    "type": "integer"
                 },
                 "message": {
                     "type": "string"

@@ -30,8 +30,8 @@ namespace quicktype {
     };
 
     struct IssCurrentLocation {
-        int64_t timestamp;
         struct IssPosition iss_position;
+        int64_t timestamp;
         std::string message;
     };
     
@@ -81,15 +81,15 @@ namespace nlohmann {
     }
 
     inline void from_json(const json& _j, struct quicktype::IssCurrentLocation& _x) {
-        _x.timestamp = _j.at("timestamp").get<int64_t>();
         _x.iss_position = _j.at("iss_position").get<struct quicktype::IssPosition>();
+        _x.timestamp = _j.at("timestamp").get<int64_t>();
         _x.message = _j.at("message").get<std::string>();
     }
 
     inline void to_json(json& _j, const struct quicktype::IssCurrentLocation& _x) {
         _j = json::object();
-        _j["timestamp"] = _x.timestamp;
         _j["iss_position"] = _x.iss_position;
+        _j["timestamp"] = _x.timestamp;
         _j["message"] = _x.message;
     }
 }

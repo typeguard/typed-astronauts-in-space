@@ -32,8 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface QTISSCurrentLocation : NSObject
-@property (nonatomic, assign) NSInteger timestamp;
 @property (nonatomic, strong) QTIssPosition *issPosition;
+@property (nonatomic, assign) NSInteger timestamp;
 @property (nonatomic, copy)   NSString *message;
 
 + (_Nullable instancetype)fromJSON:(NSString *)json encoding:(NSStringEncoding)encoding error:(NSError *_Nullable *)error;

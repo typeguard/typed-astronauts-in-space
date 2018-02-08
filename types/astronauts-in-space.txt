@@ -10,8 +10,8 @@ class Person {
 }
 
 class ISSCurrentLocation {
-    timestamp: Int
     issPosition: IssPosition
+    timestamp: Int
     message: String
 }
 

@@ -37,11 +37,11 @@ namespace QuickType
 
     public partial class IssCurrentLocation
     {
-        [JsonProperty("timestamp")]
-        public long Timestamp { get; set; }
-
         [JsonProperty("iss_position")]
         public IssPosition IssPosition { get; set; }
+
+        [JsonProperty("timestamp")]
+        public long Timestamp { get; set; }
 
         [JsonProperty("message")]
         public string Message { get; set; }

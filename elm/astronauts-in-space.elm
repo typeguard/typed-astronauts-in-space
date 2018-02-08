@@ -41,8 +41,8 @@ type alias Person =
     }
 
 type alias ISSCurrentLocation =
-    { timestamp : Int
-    , issPosition : IssPosition
+    { issPosition : IssPosition
+    , timestamp : Int
     , message : String
     }
 
@@ -90,15 +90,15 @@ encodePerson x =
 issCurrentLocation : Jdec.Decoder ISSCurrentLocation
 issCurrentLocation =
     Jpipe.decode ISSCurrentLocation
-        |> Jpipe.required "timestamp" Jdec.int
         |> Jpipe.required "iss_position" issPosition
+        |> Jpipe.required "timestamp" Jdec.int
         |> Jpipe.required "message" Jdec.string
 
 encodeISSCurrentLocation : ISSCurrentLocation -> Jenc.Value
 encodeISSCurrentLocation x =
     Jenc.object
-        [ ("timestamp", Jenc.int x.timestamp)
-        , ("iss_position", encodeIssPosition x.issPosition)
+        [ ("iss_position", encodeIssPosition x.issPosition)
+        , ("timestamp", Jenc.int x.timestamp)
         , ("message", Jenc.string x.message)
         ]
 

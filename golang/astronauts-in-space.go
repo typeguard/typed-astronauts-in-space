@@ -42,8 +42,8 @@ type Person struct {
 }
 
 type ISSCurrentLocation struct {
-	Timestamp   int64       `json:"timestamp"`
 	IssPosition IssPosition `json:"iss_position"`
+	Timestamp   int64       `json:"timestamp"`
 	Message     string      `json:"message"`
 }
 

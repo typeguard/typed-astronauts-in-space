@@ -16,14 +16,13 @@ struct Person: Codable {
 }
 
 struct ISSCurrentLocation: Codable {
-    let timestamp: Int
     let issPosition: IssPosition
+    let timestamp: Int
     let message: String
 
     enum CodingKeys: String, CodingKey {
-        case timestamp
         case issPosition = "iss_position"
-        case message
+        case timestamp, message
     }
 }
 

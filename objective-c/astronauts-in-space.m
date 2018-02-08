@@ -201,8 +201,8 @@ NSString *_Nullable QTISSCurrentLocationToJSON(QTISSCurrentLocation *iSSCurrentL
 {
     static NSDictionary<NSString *, NSString *> *properties;
     return properties = properties ? properties : @{
-        @"timestamp": @"timestamp",
         @"iss_position": @"issPosition",
+        @"timestamp": @"timestamp",
         @"message": @"message",
     };
 }

@@ -20,8 +20,8 @@ export interface Person {
 }
 
 export interface ISSCurrentLocation {
-    timestamp:    number;
     iss_position: IssPosition;
+    timestamp:    number;
     message:      string;
 }
 
@@ -137,8 +137,8 @@ export module Convert {
             name: "",
         },
         "ISSCurrentLocation": {
-            timestamp: 0,
             iss_position: O("IssPosition"),
+            timestamp: 0,
             message: "",
         },
         "IssPosition": {
