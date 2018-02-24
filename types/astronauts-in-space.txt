@@ -11,11 +11,11 @@ class Person {
 
 class ISSCurrentLocation {
     issPosition: IssPosition
-    timestamp: Int
     message: String
+    timestamp: Int
 }
 
 class IssPosition {
-    longitude: String
     latitude: String
+    longitude: String
 }

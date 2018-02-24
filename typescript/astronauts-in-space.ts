@@ -21,20 +21,20 @@ export interface Person {
 
 export interface ISSCurrentLocation {
     iss_position: IssPosition;
-    timestamp:    number;
     message:      string;
+    timestamp:    number;
 }
 
 export interface IssPosition {
-    longitude: string;
     latitude:  string;
+    longitude: string;
 }
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export module Convert {
     export function toAstronautsInSpace(json: string): AstronautsInSpace {
-        return cast(JSON.parse(json), O("AstronautsInSpace"));
+        return cast(JSON.parse(json), o("AstronautsInSpace"));
     }
 
     export function astronautsInSpaceToJson(value: AstronautsInSpace): string {
@@ -42,7 +42,7 @@ export module Convert {
     }
 
     export function toISSCurrentLocation(json: string): ISSCurrentLocation {
-        return cast(JSON.parse(json), O("ISSCurrentLocation"));
+        return cast(JSON.parse(json), o("ISSCurrentLocation"));
     }
 
     export function iSSCurrentLocationToJson(value: ISSCurrentLocation): string {
@@ -83,7 +83,7 @@ export module Convert {
 
     function isValidArray(typ: any, val: any): boolean {
         // val must be an array with no invalid elements
-        return Array.isArray(val) && val.every((element, i) => {
+        return Array.isArray(val) && val.every(element => {
             return isValid(typ, element);
         });
     }
@@ -106,30 +106,30 @@ export module Convert {
         });
     }
 
-    function A(typ: any) {
+    function a(typ: any) {
         return { typ, isArray: true };
     }
 
-    function E(name: string) {
+    function e(name: string) {
         return { name, isEnum: true };
     }
 
-    function U(...typs: any[]) {
+    function u(...typs: any[]) {
         return { typs, isUnion: true };
     }
 
-    function M(typ: any) {
+    function m(typ: any) {
         return { typ, isMap: true };
     }
 
-    function O(className: string) {
+    function o(className: string) {
         return { cls: className, isObject: true };
     }
 
     const typeMap: any = {
         "AstronautsInSpace": {
             number: 0,
-            people: A(O("Person")),
+            people: a(o("Person")),
             message: "",
         },
         "Person": {
@@ -137,13 +137,13 @@ export module Convert {
             name: "",
         },
         "ISSCurrentLocation": {
-            iss_position: O("IssPosition"),
-            timestamp: 0,
+            iss_position: o("IssPosition"),
             message: "",
+            timestamp: 0,
         },
         "IssPosition": {
-            longitude: "",
             latitude: "",
+            longitude: "",
         },
     };
 }

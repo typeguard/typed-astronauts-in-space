@@ -59,10 +59,10 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "longitude": {
+                "latitude": {
                     "type": "string"
                 },
-                "latitude": {
+                "longitude": {
                     "type": "string"
                 }
             },
@@ -79,11 +79,11 @@
                 "iss_position": {
                     "$ref": "#/definitions/IssPosition"
                 },
-                "timestamp": {
-                    "type": "integer"
-                },
                 "message": {
                     "type": "string"
+                },
+                "timestamp": {
+                    "type": "integer"
                 }
             },
             "required": [

@@ -1,10 +1,10 @@
 //  To parse this JSON data, first install
-//
+// 
 //      Boost     http://www.boost.org
 //      json.hpp  https://github.com/nlohmann/json
-//
+// 
 //  Then include this file, and then do
-//
+// 
 //     AstronautsInSpace data = nlohmann::json::parse(jsonString);
 //     IssCurrentLocation data = nlohmann::json::parse(jsonString);
 
@@ -25,14 +25,14 @@ namespace quicktype {
     };
 
     struct IssPosition {
-        std::string longitude;
         std::string latitude;
+        std::string longitude;
     };
 
     struct IssCurrentLocation {
         struct IssPosition iss_position;
-        int64_t timestamp;
         std::string message;
+        int64_t timestamp;
     };
     
     inline json get_untyped(const json &j, const char *property) {
@@ -44,7 +44,6 @@ namespace quicktype {
 }
 
 namespace nlohmann {
-
     inline void from_json(const json& _j, struct quicktype::Person& _x) {
         _x.craft = _j.at("craft").get<std::string>();
         _x.name = _j.at("name").get<std::string>();
@@ -70,26 +69,26 @@ namespace nlohmann {
     }
 
     inline void from_json(const json& _j, struct quicktype::IssPosition& _x) {
-        _x.longitude = _j.at("longitude").get<std::string>();
         _x.latitude = _j.at("latitude").get<std::string>();
+        _x.longitude = _j.at("longitude").get<std::string>();
     }
 
     inline void to_json(json& _j, const struct quicktype::IssPosition& _x) {
         _j = json::object();
-        _j["longitude"] = _x.longitude;
         _j["latitude"] = _x.latitude;
+        _j["longitude"] = _x.longitude;
     }
 
     inline void from_json(const json& _j, struct quicktype::IssCurrentLocation& _x) {
         _x.iss_position = _j.at("iss_position").get<struct quicktype::IssPosition>();
-        _x.timestamp = _j.at("timestamp").get<int64_t>();
         _x.message = _j.at("message").get<std::string>();
+        _x.timestamp = _j.at("timestamp").get<int64_t>();
     }
 
     inline void to_json(json& _j, const struct quicktype::IssCurrentLocation& _x) {
         _j = json::object();
         _j["iss_position"] = _x.iss_position;
-        _j["timestamp"] = _x.timestamp;
         _j["message"] = _x.message;
+        _j["timestamp"] = _x.timestamp;
     }
 }

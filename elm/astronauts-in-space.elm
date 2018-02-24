@@ -1,9 +1,9 @@
 -- To decode the JSON data, add this file to your project, run
---
+-- 
 --     elm-package install NoRedInk/elm-decode-pipeline
---
+-- 
 -- add these imports
---
+-- 
 --     import Json.Decode exposing (decodeString)`);
 --     import QuickType exposing (astronautsInSpace, issCurrentLocation)
 --
@@ -42,13 +42,13 @@ type alias Person =
 
 type alias ISSCurrentLocation =
     { issPosition : IssPosition
-    , timestamp : Int
     , message : String
+    , timestamp : Int
     }
 
 type alias IssPosition =
-    { longitude : String
-    , latitude : String
+    { latitude : String
+    , longitude : String
     }
 
 -- decoders and encoders
@@ -91,28 +91,28 @@ issCurrentLocation : Jdec.Decoder ISSCurrentLocation
 issCurrentLocation =
     Jpipe.decode ISSCurrentLocation
         |> Jpipe.required "iss_position" issPosition
-        |> Jpipe.required "timestamp" Jdec.int
         |> Jpipe.required "message" Jdec.string
+        |> Jpipe.required "timestamp" Jdec.int
 
 encodeISSCurrentLocation : ISSCurrentLocation -> Jenc.Value
 encodeISSCurrentLocation x =
     Jenc.object
         [ ("iss_position", encodeIssPosition x.issPosition)
-        , ("timestamp", Jenc.int x.timestamp)
         , ("message", Jenc.string x.message)
+        , ("timestamp", Jenc.int x.timestamp)
         ]
 
 issPosition : Jdec.Decoder IssPosition
 issPosition =
     Jpipe.decode IssPosition
-        |> Jpipe.required "longitude" Jdec.string
         |> Jpipe.required "latitude" Jdec.string
+        |> Jpipe.required "longitude" Jdec.string
 
 encodeIssPosition : IssPosition -> Jenc.Value
 encodeIssPosition x =
     Jenc.object
-        [ ("longitude", Jenc.string x.longitude)
-        , ("latitude", Jenc.string x.latitude)
+        [ ("latitude", Jenc.string x.latitude)
+        , ("longitude", Jenc.string x.longitude)
         ]
 
 --- encoder helpers

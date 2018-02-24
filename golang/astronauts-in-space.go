@@ -1,10 +1,10 @@
 // To parse and unparse this JSON data, add this code to your project and do:
 //
-//    r, err := UnmarshalAstronautsInSpace(bytes)
-//    bytes, err = r.Marshal()
+//    astronautsInSpace, err := UnmarshalAstronautsInSpace(bytes)
+//    bytes, err = astronautsInSpace.Marshal()
 //
-//    r, err := UnmarshalISSCurrentLocation(bytes)
-//    bytes, err = r.Marshal()
+//    iSSCurrentLocation, err := UnmarshalISSCurrentLocation(bytes)
+//    bytes, err = iSSCurrentLocation.Marshal()
 
 package main
 
@@ -31,23 +31,23 @@ func (r *ISSCurrentLocation) Marshal() ([]byte, error) {
 }
 
 type AstronautsInSpace struct {
-	Number  int64    `json:"number"`
-	People  []Person `json:"people"`
+	Number  int64    `json:"number"` 
+	People  []Person `json:"people"` 
 	Message string   `json:"message"`
 }
 
 type Person struct {
 	Craft string `json:"craft"`
-	Name  string `json:"name"`
+	Name  string `json:"name"` 
 }
 
 type ISSCurrentLocation struct {
 	IssPosition IssPosition `json:"iss_position"`
-	Timestamp   int64       `json:"timestamp"`
-	Message     string      `json:"message"`
+	Message     string      `json:"message"`     
+	Timestamp   int64       `json:"timestamp"`   
 }
 
 type IssPosition struct {
+	Latitude  string `json:"latitude"` 
 	Longitude string `json:"longitude"`
-	Latitude  string `json:"latitude"`
 }
