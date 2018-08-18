@@ -1,5 +1,5 @@
 // To parse this JSON:
-// 
+//
 //   NSError *error;
 //   QTAstronautsInSpace *astronautsInSpace = [QTAstronautsInSpace fromJSON:json encoding:NSUTF8Encoding error:&error];
 //   QTISSCurrentLocation *iSSCurrentLocation = [QTISSCurrentLocation fromJSON:json encoding:NSUTF8Encoding error:&error];
@@ -16,9 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Object interfaces
 
 @interface QTAstronautsInSpace : NSObject
-@property (nonatomic, assign) NSInteger number;
-@property (nonatomic, copy)   NSArray<QTPerson *> *people;
 @property (nonatomic, copy)   NSString *message;
+@property (nonatomic, copy)   NSArray<QTPerson *> *people;
+@property (nonatomic, assign) NSInteger number;
 
 + (_Nullable instancetype)fromJSON:(NSString *)json encoding:(NSStringEncoding)encoding error:(NSError *_Nullable *)error;
 + (_Nullable instancetype)fromData:(NSData *)data error:(NSError *_Nullable *)error;
@@ -33,8 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QTISSCurrentLocation : NSObject
 @property (nonatomic, strong) QTIssPosition *issPosition;
-@property (nonatomic, copy)   NSString *message;
 @property (nonatomic, assign) NSInteger timestamp;
+@property (nonatomic, copy)   NSString *message;
 
 + (_Nullable instancetype)fromJSON:(NSString *)json encoding:(NSStringEncoding)encoding error:(NSError *_Nullable *)error;
 + (_Nullable instancetype)fromData:(NSData *)data error:(NSError *_Nullable *)error;
@@ -43,8 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface QTIssPosition : NSObject
-@property (nonatomic, copy) NSString *latitude;
 @property (nonatomic, copy) NSString *longitude;
+@property (nonatomic, copy) NSString *latitude;
 @end
 
 NS_ASSUME_NONNULL_END

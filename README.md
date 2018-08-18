@@ -19,9 +19,12 @@
 * [JavaScript](javascript)
 * [Flow](flow)
 * [Swift](swift4)
+* [Kotlin (beta)](kotlin)
 * [Elm](elm)
 * [JSON Schema](json-schema)
-* [Simple Types](types)
+* [Ruby](ruby)
+* [Dart](dart)
+* [Python](python)
 
 # Contributing
 

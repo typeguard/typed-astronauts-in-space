@@ -1,9 +1,9 @@
 // To use this code, add the following Maven dependency to your project:
-// 
+//
 //     com.fasterxml.jackson.core : jackson-databind : 2.9.0
-// 
+//
 // Import this package:
-// 
+//
 //     import io.quicktype.Converter;
 //
 // Then you can deserialize a JSON string with
@@ -47,12 +47,12 @@ public class Converter {
     }
 
     private static ObjectReader getAstronautsInSpaceObjectReader() {
-        if (AstronautsInSpaceReader == null) instantiateMapper();
+        if (AstronautsInSpaceReader == null) instantiateAstronautsInSpaceMapper();
         return AstronautsInSpaceReader;
     }
 
     private static ObjectWriter getAstronautsInSpaceObjectWriter() {
-        if (AstronautsInSpaceWriter == null) instantiateMapper();
+        if (AstronautsInSpaceWriter == null) instantiateAstronautsInSpaceMapper();
         return AstronautsInSpaceWriter;
     }
 
@@ -66,12 +66,12 @@ public class Converter {
     }
 
     private static ObjectReader getISSCurrentLocationObjectReader() {
-        if (ISSCurrentLocationReader == null) instantiateMapper();
+        if (ISSCurrentLocationReader == null) instantiateISSCurrentLocationMapper();
         return ISSCurrentLocationReader;
     }
 
     private static ObjectWriter getISSCurrentLocationObjectWriter() {
-        if (ISSCurrentLocationWriter == null) instantiateMapper();
+        if (ISSCurrentLocationWriter == null) instantiateISSCurrentLocationMapper();
         return ISSCurrentLocationWriter;
     }
 }

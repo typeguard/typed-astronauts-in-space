@@ -6,9 +6,9 @@
 import Foundation
 
 struct AstronautsInSpace: Codable {
-    let number: Int
-    let people: [Person]
     let message: String
+    let people: [Person]
+    let number: Int
 }
 
 struct Person: Codable {
@@ -17,24 +17,24 @@ struct Person: Codable {
 
 struct ISSCurrentLocation: Codable {
     let issPosition: IssPosition
-    let message: String
     let timestamp: Int
+    let message: String
 
     enum CodingKeys: String, CodingKey {
         case issPosition = "iss_position"
-        case message, timestamp
+        case timestamp, message
     }
 }
 
 struct IssPosition: Codable {
-    let latitude, longitude: String
+    let longitude, latitude: String
 }
 
-// MARK: Convenience initializers
+// MARK: Convenience initializers and mutators
 
 extension AstronautsInSpace {
     init(data: Data) throws {
-        self = try JSONDecoder().decode(AstronautsInSpace.self, from: data)
+        self = try newJSONDecoder().decode(AstronautsInSpace.self, from: data)
     }
 
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -48,8 +48,20 @@ extension AstronautsInSpace {
         try self.init(data: try Data(contentsOf: url))
     }
 
+    func with(
+        message: String? = nil,
+        people: [Person]? = nil,
+        number: Int? = nil
+    ) -> AstronautsInSpace {
+        return AstronautsInSpace(
+            message: message ?? self.message,
+            people: people ?? self.people,
+            number: number ?? self.number
+        )
+    }
+
     func jsonData() throws -> Data {
-        return try JSONEncoder().encode(self)
+        return try newJSONEncoder().encode(self)
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -59,7 +71,7 @@ extension AstronautsInSpace {
 
 extension Person {
     init(data: Data) throws {
-        self = try JSONDecoder().decode(Person.self, from: data)
+        self = try newJSONDecoder().decode(Person.self, from: data)
     }
 
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -73,8 +85,18 @@ extension Person {
         try self.init(data: try Data(contentsOf: url))
     }
 
+    func with(
+        craft: String? = nil,
+        name: String? = nil
+    ) -> Person {
+        return Person(
+            craft: craft ?? self.craft,
+            name: name ?? self.name
+        )
+    }
+
     func jsonData() throws -> Data {
-        return try JSONEncoder().encode(self)
+        return try newJSONEncoder().encode(self)
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -84,7 +106,7 @@ extension Person {
 
 extension ISSCurrentLocation {
     init(data: Data) throws {
-        self = try JSONDecoder().decode(ISSCurrentLocation.self, from: data)
+        self = try newJSONDecoder().decode(ISSCurrentLocation.self, from: data)
     }
 
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -98,8 +120,20 @@ extension ISSCurrentLocation {
         try self.init(data: try Data(contentsOf: url))
     }
 
+    func with(
+        issPosition: IssPosition? = nil,
+        timestamp: Int? = nil,
+        message: String? = nil
+    ) -> ISSCurrentLocation {
+        return ISSCurrentLocation(
+            issPosition: issPosition ?? self.issPosition,
+            timestamp: timestamp ?? self.timestamp,
+            message: message ?? self.message
+        )
+    }
+
     func jsonData() throws -> Data {
-        return try JSONEncoder().encode(self)
+        return try newJSONEncoder().encode(self)
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -109,7 +143,7 @@ extension ISSCurrentLocation {
 
 extension IssPosition {
     init(data: Data) throws {
-        self = try JSONDecoder().decode(IssPosition.self, from: data)
+        self = try newJSONDecoder().decode(IssPosition.self, from: data)
     }
 
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -123,11 +157,37 @@ extension IssPosition {
         try self.init(data: try Data(contentsOf: url))
     }
 
+    func with(
+        longitude: String? = nil,
+        latitude: String? = nil
+    ) -> IssPosition {
+        return IssPosition(
+            longitude: longitude ?? self.longitude,
+            latitude: latitude ?? self.latitude
+        )
+    }
+
     func jsonData() throws -> Data {
-        return try JSONEncoder().encode(self)
+        return try newJSONEncoder().encode(self)
     }
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
         return String(data: try self.jsonData(), encoding: encoding)
     }
+}
+
+func newJSONDecoder() -> JSONDecoder {
+    let decoder = JSONDecoder()
+    if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
+        decoder.dateDecodingStrategy = .iso8601
+    }
+    return decoder
+}
+
+func newJSONEncoder() -> JSONEncoder {
+    let encoder = JSONEncoder()
+    if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
+        encoder.dateEncodingStrategy = .iso8601
+    }
+    return encoder
 }

@@ -1,9 +1,9 @@
 -- To decode the JSON data, add this file to your project, run
--- 
+--
 --     elm-package install NoRedInk/elm-decode-pipeline
--- 
+--
 -- add these imports
--- 
+--
 --     import Json.Decode exposing (decodeString)`);
 --     import QuickType exposing (astronautsInSpace, issCurrentLocation)
 --
@@ -30,9 +30,9 @@ import Dict exposing (Dict, map, toList)
 import Array exposing (Array, map)
 
 type alias AstronautsInSpace =
-    { number : Int
+    { message : String
     , people : Array Person
-    , message : String
+    , number : Int
     }
 
 type alias Person =
@@ -42,13 +42,13 @@ type alias Person =
 
 type alias ISSCurrentLocation =
     { issPosition : IssPosition
-    , message : String
     , timestamp : Int
+    , message : String
     }
 
 type alias IssPosition =
-    { latitude : String
-    , longitude : String
+    { longitude : String
+    , latitude : String
     }
 
 -- decoders and encoders
@@ -62,16 +62,16 @@ issCurrentLocationToString r = Jenc.encode 0 (encodeISSCurrentLocation r)
 astronautsInSpace : Jdec.Decoder AstronautsInSpace
 astronautsInSpace =
     Jpipe.decode AstronautsInSpace
-        |> Jpipe.required "number" Jdec.int
-        |> Jpipe.required "people" (Jdec.array person)
         |> Jpipe.required "message" Jdec.string
+        |> Jpipe.required "people" (Jdec.array person)
+        |> Jpipe.required "number" Jdec.int
 
 encodeAstronautsInSpace : AstronautsInSpace -> Jenc.Value
 encodeAstronautsInSpace x =
     Jenc.object
-        [ ("number", Jenc.int x.number)
+        [ ("message", Jenc.string x.message)
         , ("people", makeArrayEncoder encodePerson x.people)
-        , ("message", Jenc.string x.message)
+        , ("number", Jenc.int x.number)
         ]
 
 person : Jdec.Decoder Person
@@ -91,28 +91,28 @@ issCurrentLocation : Jdec.Decoder ISSCurrentLocation
 issCurrentLocation =
     Jpipe.decode ISSCurrentLocation
         |> Jpipe.required "iss_position" issPosition
-        |> Jpipe.required "message" Jdec.string
         |> Jpipe.required "timestamp" Jdec.int
+        |> Jpipe.required "message" Jdec.string
 
 encodeISSCurrentLocation : ISSCurrentLocation -> Jenc.Value
 encodeISSCurrentLocation x =
     Jenc.object
         [ ("iss_position", encodeIssPosition x.issPosition)
-        , ("message", Jenc.string x.message)
         , ("timestamp", Jenc.int x.timestamp)
+        , ("message", Jenc.string x.message)
         ]
 
 issPosition : Jdec.Decoder IssPosition
 issPosition =
     Jpipe.decode IssPosition
-        |> Jpipe.required "latitude" Jdec.string
         |> Jpipe.required "longitude" Jdec.string
+        |> Jpipe.required "latitude" Jdec.string
 
 encodeIssPosition : IssPosition -> Jenc.Value
 encodeIssPosition x =
     Jenc.object
-        [ ("latitude", Jenc.string x.latitude)
-        , ("longitude", Jenc.string x.longitude)
+        [ ("longitude", Jenc.string x.longitude)
+        , ("latitude", Jenc.string x.latitude)
         ]
 
 --- encoder helpers

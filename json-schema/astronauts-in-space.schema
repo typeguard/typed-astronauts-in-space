@@ -1,19 +1,30 @@
 {
-    "oneOf": [
-        [
-            "AstronautsInSpace",
-            {
-                "$ref": "#/definitions/AstronautsInSpace"
-            }
-        ],
-        [
-            "ISSCurrentLocation",
-            {
-                "$ref": "#/definitions/ISSCurrentLocation"
-            }
-        ]
-    ],
+    "$schema": "http://json-schema.org/draft-06/schema#",
     "definitions": {
+        "AstronautsInSpace": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "people": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Person"
+                    }
+                },
+                "number": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "message",
+                "number",
+                "people"
+            ],
+            "title": "AstronautsInSpace"
+        },
         "Person": {
             "type": "object",
             "additionalProperties": false,
@@ -29,48 +40,7 @@
                 "craft",
                 "name"
             ],
-            "title": "person"
-        },
-        "AstronautsInSpace": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "number": {
-                    "type": "integer"
-                },
-                "people": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Person"
-                    }
-                },
-                "message": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "message",
-                "number",
-                "people"
-            ],
-            "title": "AstronautsInSpace"
-        },
-        "IssPosition": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "latitude": {
-                    "type": "string"
-                },
-                "longitude": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "latitude",
-                "longitude"
-            ],
-            "title": "iss_position"
+            "title": "Person"
         },
         "ISSCurrentLocation": {
             "type": "object",
@@ -79,11 +49,11 @@
                 "iss_position": {
                     "$ref": "#/definitions/IssPosition"
                 },
-                "message": {
-                    "type": "string"
-                },
                 "timestamp": {
                     "type": "integer"
+                },
+                "message": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -92,6 +62,23 @@
                 "timestamp"
             ],
             "title": "ISSCurrentLocation"
+        },
+        "IssPosition": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "longitude": {
+                    "type": "string"
+                },
+                "latitude": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "latitude",
+                "longitude"
+            ],
+            "title": "IssPosition"
         }
     }
 }

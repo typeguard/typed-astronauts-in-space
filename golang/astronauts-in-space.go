@@ -31,9 +31,9 @@ func (r *ISSCurrentLocation) Marshal() ([]byte, error) {
 }
 
 type AstronautsInSpace struct {
-	Number  int64    `json:"number"` 
-	People  []Person `json:"people"` 
 	Message string   `json:"message"`
+	People  []Person `json:"people"` 
+	Number  int64    `json:"number"` 
 }
 
 type Person struct {
@@ -43,11 +43,11 @@ type Person struct {
 
 type ISSCurrentLocation struct {
 	IssPosition IssPosition `json:"iss_position"`
-	Message     string      `json:"message"`     
 	Timestamp   int64       `json:"timestamp"`   
+	Message     string      `json:"message"`     
 }
 
 type IssPosition struct {
-	Latitude  string `json:"latitude"` 
 	Longitude string `json:"longitude"`
+	Latitude  string `json:"latitude"` 
 }

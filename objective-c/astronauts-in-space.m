@@ -115,9 +115,9 @@ NSString *_Nullable QTISSCurrentLocationToJSON(QTISSCurrentLocation *iSSCurrentL
 {
     static NSDictionary<NSString *, NSString *> *properties;
     return properties = properties ? properties : @{
-        @"number": @"number",
-        @"people": @"people",
         @"message": @"message",
+        @"people": @"people",
+        @"number": @"number",
     };
 }
 
@@ -202,8 +202,8 @@ NSString *_Nullable QTISSCurrentLocationToJSON(QTISSCurrentLocation *iSSCurrentL
     static NSDictionary<NSString *, NSString *> *properties;
     return properties = properties ? properties : @{
         @"iss_position": @"issPosition",
-        @"message": @"message",
         @"timestamp": @"timestamp",
+        @"message": @"message",
     };
 }
 
@@ -233,7 +233,8 @@ NSString *_Nullable QTISSCurrentLocationToJSON(QTISSCurrentLocation *iSSCurrentL
 
 - (void)setValue:(nullable id)value forKey:(NSString *)key
 {
-    [super setValue:value forKey:QTISSCurrentLocation.properties[key]];
+    id resolved = QTISSCurrentLocation.properties[key];
+    if (resolved) [super setValue:value forKey:resolved];
 }
 
 - (NSDictionary *)JSONDictionary
@@ -271,8 +272,8 @@ NSString *_Nullable QTISSCurrentLocationToJSON(QTISSCurrentLocation *iSSCurrentL
 {
     static NSDictionary<NSString *, NSString *> *properties;
     return properties = properties ? properties : @{
-        @"latitude": @"latitude",
         @"longitude": @"longitude",
+        @"latitude": @"latitude",
     };
 }
 

@@ -9,7 +9,6 @@ namespace QuickType
 {
     using System;
     using System.Collections.Generic;
-    using System.Net;
 
     using System.Globalization;
     using Newtonsoft.Json;
@@ -17,14 +16,14 @@ namespace QuickType
 
     public partial class AstronautsInSpace
     {
-        [JsonProperty("number")]
-        public long Number { get; set; }
+        [JsonProperty("message")]
+        public string Message { get; set; }
 
         [JsonProperty("people")]
         public Person[] People { get; set; }
 
-        [JsonProperty("message")]
-        public string Message { get; set; }
+        [JsonProperty("number")]
+        public long Number { get; set; }
     }
 
     public partial class Person
@@ -41,20 +40,20 @@ namespace QuickType
         [JsonProperty("iss_position")]
         public IssPosition IssPosition { get; set; }
 
-        [JsonProperty("message")]
-        public string Message { get; set; }
-
         [JsonProperty("timestamp")]
         public long Timestamp { get; set; }
+
+        [JsonProperty("message")]
+        public string Message { get; set; }
     }
 
     public partial class IssPosition
     {
-        [JsonProperty("latitude")]
-        public string Latitude { get; set; }
-
         [JsonProperty("longitude")]
         public string Longitude { get; set; }
+
+        [JsonProperty("latitude")]
+        public string Latitude { get; set; }
     }
 
     public partial class AstronautsInSpace
@@ -73,17 +72,14 @@ namespace QuickType
         public static string ToJson(this IssCurrentLocation self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
     }
 
-    internal class Converter
+    internal static class Converter
     {
         public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
         {
             MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
             DateParseHandling = DateParseHandling.None,
-            Converters = { 
-                new IsoDateTimeConverter()
-                {
-                    DateTimeStyles = DateTimeStyles.AssumeUniversal,
-                },
+            Converters = {
+                new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
             },
         };
     }
